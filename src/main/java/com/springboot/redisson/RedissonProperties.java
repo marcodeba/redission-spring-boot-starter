@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "marco.redisson")
 public class RedissonProperties {
-    private String host = "127.0.0.1";
+    private String host = "localhost";
     private int port = 6379;
     private int timeOut;
     private boolean ssl;

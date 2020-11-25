@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.StringUtils;
 
 @Configuration
 @EnableConfigurationProperties(RedissonProperties.class)
@@ -16,7 +15,7 @@ public class RedissonAutoConfiguration {
     @Bean
     public RedissonClient redissonClient(RedissonProperties redissonProperties) {
         Config config = new Config();
-        String prefix = StringUtils.isEmpty(redissonProperties.isSsl()) ? "redis://" : "rediss://";
+        String prefix = !redissonProperties.isSsl() ? "redis://" : "rediss://";
         config.useSingleServer().
                 setAddress(prefix + redissonProperties.getHost() + ":" + redissonProperties.getPort()).
                 setConnectTimeout(redissonProperties.getTimeOut());
